@@ -1,0 +1,26 @@
+<p>cursos works!</p>
+
+<a>{{nomePortal}}</a>
+<br>
+<span>Lista</span>
+
+<ul>
+    <li *ngFor="let curso of cursos">
+        {{curso}}
+    </li>
+</ul>
+<app-curso-detalhe></app-curso-detalhe>
+
+<section>
+    <article>
+      <h3>Two-way data binding</h3>
+      <div>
+        <input type="text" name="nome"
+          [value]="nome"
+  
+          >
+      </div>
+      <br>
+      <span>Você digitou {{nome}}</span>
+    </article>
+  </section>

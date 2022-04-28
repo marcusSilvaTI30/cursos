@@ -1,0 +1,92 @@
+<h2>{{subTitle}}</h2>
+<meu-primeiro-component></meu-primeiro-component>
+<app-meu-primeiro-component2></app-meu-primeiro-component2>
+<app-cursos></app-cursos>
+
+<br>
+<!-- 
+<article>
+    <h3>Class e Style Binding</h3>
+    <div>
+        Selecione uma classe:
+        <select class="form-select" #classe (change)="0">
+            <option value="alert-success">Sucesso</option>
+            <option value="alert-info">Info</option>
+            <option value="alert-warning">Alerta</option>
+            <option value="alert-danger">Erro</option>
+        </select>
+        
+        <br> <br>
+
+        <div class="alert {{classe.value}}">
+          Teste
+        </div>
+
+        <br> <br>
+
+        <div class="alert" role="alert" 
+            [class.alert-success]="classe.value == 'alert-success'">
+            Sucesso
+          </div>
+          <div class="alert" role="alert" 
+            [class.alert-info]="classe.value == 'alert-info'">
+            Info
+          </div>
+          <div class="alert" role="alert"
+            [class.alert-warning]="classe.value == 'alert-warning'">
+            Alerta
+          </div>
+          <div class="alert" role="alert"
+            [class.alert-danger]="classe.value == 'alert-danger'">
+            Erro
+          </div>
+
+          <br><br>
+
+          <div class="alert" role="alert"
+            [class.alert-danger]="classe.value == 'alert-danger'"
+            [style.display]="classe.value == 'alert-danger' ? 'block' : 'none'">
+          Erro com display block/none; 
+        </div>
+    </div>
+</article> -->
+
+<!-- <section>
+
+  <article>
+    <h3>Event binding</h3>
+    <div>
+      <button class="btn btn-primary" (click)="botaoClicado()">Clique aqui</button>
+      <br><br>
+      <input type="text" 
+        #campoInput
+        (keyup)="onKeyUp($event)"
+        (blur)="salvarValor((campoInput).value)"
+        (keyup.enter)="salvarValor((campoInput).value)"
+         >
+    </div>
+
+    <br><br>
+
+    <span>
+      Valor atual {{valorAtual}}
+    </span>
+    
+    <br><br>
+
+    <span>
+      Valor salvo {{valorSalvo}}
+    </span>
+
+    <br><br>
+    <span
+      (mouseover)="onMouseOverOut()"
+      (mouseout)="onMouseOverOut()"
+      [class.highlight]="isMouseOver">
+      Passe o mouse 
+    </span>
+      
+  </article>
+
+</section> -->
+
