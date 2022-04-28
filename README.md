@@ -1,2 +1,2 @@
 # cursos
-Repositório para armazenar os códigos feitos com aprendizados realizados através de bootcamps, cursos  e tutoriais.
+Repositório para armazenar os códigos feitos através de bootcamps, cursos  e tutoriais.
