@@ -1,0 +1,15 @@
+<p>
+   Desc:: {{tarefa.desc}}
+</p>
+
+<p>
+    Resp1:: {{tarefa.responsavel !=null ? tarefa.responsavel.nome : ''}}
+</p>
+
+<p>
+    <!-- operador elvis
+    ****
+    **** Caso o objeto esteja vazio ele não procede
+    -->
+    Resp2:: {{tarefa.responsavel?.nome}} 
+</p>

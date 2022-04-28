@@ -1,0 +1,43 @@
+<!-- <h1>
+    <i class="bi "
+    [class.bi-bookmark-star]="!meuFavorito"
+    [class.bi-bookmark-star-fill]="meuFavorito"
+    (click)="onClick()"></i>
+</h1> -->
+
+<h1>
+    <i class="bi"
+    [ngClass]="{
+        'bi-bookmark-star': !meuFavorito, 
+        'bi-bookmark-star-fill': meuFavorito
+    }"
+    (click)="onClick()"></i>
+</h1>
+
+<h5>Styles com property binding</h5>
+
+<button
+    [style.background]="ativo ? 'blue' : 'gray'"
+    [style.color]="ativo ? 'white' : 'black'"
+    [style.fontWeight]="ativo ? 'bold' : 'normal'"
+    [style.fontSize]="tamanhoFonte+'px'"
+    (click)="mudarAtivo()">
+    Mudar att 
+</button>
+
+<br><br>
+
+<input type="text" [(ngModel)]="tamanhoFonte">
+
+<h5>NgStyle</h5>
+
+<button
+    [ngStyle]="{
+        'backgroundColor' : (ativo ? 'blue' : 'gray'),
+        'color' : (ativo ? 'white' : 'black'),
+        'fontWeight' : (ativo ? 'bold' : 'normal'),
+        'fontSize':tamanhoFonte+'px'
+    }"
+    (click)="mudarAtivo()">
+    Mudar att 
+</button>
