@@ -49,7 +49,7 @@ export class ClientesComponent implements OnInit {
         if (search == '') {
           this.clientes$ = data;
         } else {
-          this.clientes$ = data.filter(data => data.nome.indexOf(search) > -1 ? data : null);
+          this.clientes$ = data.filter(data =>data.nome.toLocaleUpperCase().indexOf(search.toLocaleUpperCase()) > -1 ? data : null);
         }
 
         console.log(this.clientes$);

@@ -22,7 +22,7 @@
 
 <div class="card mt-3">
   <div class="card-body">
-    <table class="table table-hover">
+    <table class="table table-hover"  *ngIf="clientes$ else loadingError">
       <thead>
         <tr>
           <th class="head-table-cliente">Nome</th>
