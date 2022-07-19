@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Currículo</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link rel="stylesheet" href="curriculo.css" />
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 px-0">
+                <div class="card mt-4">
+                    <div class="card-header text-white bg-success-light">
+                        Informações pessoais
+                    </div>
+                    <div class="card-body">
+                        <h4>Dados pessoais</h4>
+                        <div class="row g-3 mt-2">
+                            <div class="col-12">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nome" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mt-2">
+                            <div class="col-4">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" placeholder="">
+                            </div>
+                            <div class="col-4">
+                                <label for="telefone" class="form-label">Telefone</label>
+                                <input type="input" class="form-control" id="telefone" placeholder="" maxlength="9">
+                            </div>
+                            <div class="col-4">
+                                <label for="data-nascimento">Data de nascimento</label>
+                                <input id="data-nascimento" class="form-control mt-2" type="date" />
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mt-2">
+                            <h4>Endereço</h4>
+                            <div class="col-12">
+                                <label for="logradouro" class="form-label">Logradouro</label>
+                                <input type="text" class="form-control" id="logradouro" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mt-2">
+                            <div class="col-4">
+                                <label for="cidade" class="form-label">Cidade</label>
+                                <select class="form-select" aria-label="cidade">
+                                    <option selected>Selecione a cidade</option>
+                                    <option value="bsb">BSB</option>
+                                    <option value="gyn">Goiania</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label for="estado" class="form-label">Estado</label>
+                                <select class="form-select" aria-label="estado">
+                                    <option selected>Selecione a cidade</option>
+                                    <option value="df">DF</option>
+                                    <option value="go">GO</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label for="bairro" class="form-label">Bairro</label>
+                                <input type="text" class="form-control" id="bairro" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mt-2">
+                            <div class="col-12">
+                                <label for="objetivo-profissional" class="form-label">Objetivo Profissional</label>
+                                <input type="text" class="form-control" id="objetivo-profissional" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mt-2">
+                            <div class="col-12">
+                                <label for="resumo-profissional" class="form-label">Resumo Profissional</label>
+                                <textarea class="form-control" id="resumo-profissional" rows="5"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header text-dark bg-light">
+                        Experiência
+                    </div>
+                    <div class="card-body">
+                        <div class="row mt-2 text-end">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-success mb-3" id="btn-add-new-experiencia">
+                                    Adicionar novo
+                                </button>
+                            </div>
+                        </div>
+                        <form class="form-experiencia" id="form-experiencia" onsubmit="return false;" novalidate>
+                            <div class="row g-3 " id="info-experiencia-cargo">
+                                <div class="col-6">
+                                    <label for="cargo-experiencia" class="form-label">Cargo</label>
+                                    <input type="text" class="form-control" id="cargo-experiencia" placeholder=""
+                                        required>
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="empresa-experiencia" class="form-label">Instituição</label>
+                                    <input type="text" class="form-control" id="empresa-experiencia" placeholder=""
+                                        required>
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-3 mt-2 " id="info-experiencia">
+                                <div class="col-4">
+                                    <label for="exampleFormControlInput1" class="form-label">Emprego atual</label>
+                                    <select class="form-select" aria-label="Default select example"
+                                        id="situacao-experiencia" required>
+                                        <option value="Sim" selected>Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <label for="data-inicio-experiencia">Data de Início</label>
+                                    <input id="data-inicio-experiencia" class="form-control mt-2" type="date"
+                                        required />
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label for="data-conclusao-experiencia">Data de conclusao</label>
+                                    <input id="data-conclusao-experiencia" class="form-control mt-2" type="date"
+                                        required />
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-3 mt-2 " id="info-experiencia-data">
+                                <div class="col-12">
+                                    <label for="descricao-experiencia" class="form-label">Descrição</label>
+                                    <textarea class="form-control" id="descricao-experiencia" rows="5"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2 text-end " id="btn-experiencia">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success mb-3"
+                                        id="btn-add-experiencia">Salvar</button>
+                                    <button type="reset" class="btn btn-danger mb-3"
+                                        id="btn-cancelar-experiencia">Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row">
+                            <div class="col-12 mt-2">
+                                <table class="table " id="tb-experiencia">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Empresa</th>
+                                            <th scope="col">Cargo</th>
+                                            <th scope="col">Período</th>
+                                            <th scope="col">Descricao</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header text-white bg-success-light">
+                        Formação Acadêmica
+                    </div>
+                    <div class="card-body">
+                        <div class="row mt-2 text-end">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-success mb-3" id="btn-add-new-formacao">
+                                    Adicionar novo
+                                </button>
+                            </div>
+                        </div>
+                        <form class="form-formacao-academica" id="form-formacao-academica" onsubmit="return false;"
+                            novalidate>
+                            <div class="row g-3 hidden-element" id="info-instituicao-academica">
+                                <div class="col-12">
+                                    <label for="instituicao-academica" class="form-label">Instituição</label>
+                                    <input type="text" class="form-control" id="instituicao-academica" placeholder=""
+                                        required>
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-3 mt-2 hidden-element" id="info-formacao-academica">
+                                <div class="col-6">
+                                    <label for="curso-academico" class="form-label">Curso</label>
+                                    <input type="text" class="form-control" id="curso-academico" placeholder=""
+                                        required>
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="exampleFormControlInput1" class="form-label">Situação do curso</label>
+                                    <select class="form-select" aria-label="Default select example"
+                                        id="situacao-curso-academico" required>
+                                        <option value="Concluído" selected>Concluído</option>
+                                        <option value="Em andamento">Em andamento</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-2 hidden-element" id="info-formacao-academica-data">
+                                <div class="col-6">
+                                    <label for="data-inicio-academico">Data de Início</label>
+                                    <input id="data-inicio-academico" class="form-control mt-2" type="date" required />
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="data-conclusao-academico">Data de conclusao</label>
+                                    <input id="data-conclusao-academico" class="form-control mt-2" type="date"
+                                        required />
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2 text-end hidden-element" id="btn-formacao-academica">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success mb-3"
+                                        id="btn-add-formacao-academica">Salvar</button>
+                                    <button type="reset" class="btn btn-danger mb-3"
+                                        id="btn-cancelar-formacao-academica">Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row">
+                            <div class="col-12 mt-2">
+                                <table class="table hidden-element" id="tb-formacao-academica">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Instituição</th>
+                                            <th scope="col">Curso</th>
+                                            <th scope="col">Situação</th>
+                                            <th scope="col">Período</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header text-white bg-success-light">
+                        Idiomas
+                    </div>
+                    <div class="card-body">
+                        <div class="row mt-2 text-end">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-success mb-3" id="btn-add-new-idioma">
+                                    Adicionar novo
+                                </button>
+                            </div>
+                        </div>
+
+                        <form class="form-idiomas" id="form-idiomas" onsubmit="return false;" novalidate>
+                            <div class="row g-3  hidden-element" id="info-idiomas">
+                                <div class="col-6">
+                                    <label for="idioma" class="form-label">Idioma</label>
+                                    <input type="text" class="form-control" id="idioma" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Fluência</label>
+                                    <select class="form-select" aria-label="Default select example" id="fluencia"
+                                        required>
+                                        <option value="Básico" selected>Básico</option>
+                                        <option value="Intermediário">Intermediário</option>
+                                        <option value="Avançado">Avançado</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label for="data-conclusao">Data de conclusao</label>
+                                    <input id="data-conclusao" class="form-control mt-2" type="date" required />
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2 text-end  hidden-element" id="btn-idiomas">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success mb-3"
+                                        id="btn-add-idioma">Salvar</button>
+                                    <button type="reset" class="btn btn-danger mb-3"
+                                        id="btn-cancelar-idioma">Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row">
+                            <div class="col-12 mt-2">
+                                <table class="table hidden-element" id="tb-idiomas">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Descrição</th>
+                                            <th scope="col">Fluência</th>
+                                            <th scope="col">Data de conclusão</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header text-dark bg-light">
+                        Capacitação/Curso
+                    </div>
+                    <div class="card-body">
+                        <div class="row mt-2 text-end">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-success mb-3" id="btn-add-new-capacitacao">
+                                    Adicionar novo
+                                </button>
+                            </div>
+                        </div>
+
+                        <form class="form-capacitacao" id="form-capacitacao" onsubmit="return false;" novalidate>
+                            <div class="row g-3  hidden-element" id="info-capacitacao-instituicao">
+                                <div class="col-12">
+                                    <label for="curso" class="form-label">Curso</label>
+                                    <input type="text" class="form-control" id="curso" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-2 hidden-element" id="info-capacitacao">
+                                <div class="col-6">
+                                    <label for="instituicao" class="form-label">Instituição</label>
+                                    <input type="text" class="form-control" id="instituicao" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label for="carga-horaria" class="form-label">Carga horária</label>
+                                    <input type="text" class="form-control" id="carga-horaria" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label for="data-conclusao-curso">Data de conclusao</label>
+                                    <input id="data-conclusao-curso" class="form-control mt-2" type="date" required />
+                                    <div class="invalid-feedback">
+                                        Campo obrigatório
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2 text-end  hidden-element" id="btn-capacitacao">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success mb-3"
+                                        id="btn-add-capacitacao">Salvar</button>
+                                    <button type="reset" class="btn btn-danger mb-3"
+                                        id="btn-cancelar-capacitacao">Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row">
+                            <div class="col-12 mt-2">
+                                <table class="table hidden-element" id="tb-capacitacao">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Curso</th>
+                                            <th scope="col">Instituição</th>
+                                            <th scope="col">Carga horária</th>
+                                            <th scope="col">Ano de conclusão</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+        integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
+
+    <script>
+        var $isEdit = false;
+        var $isFormValid = false;
+        var $linha = null;
+
+        var maskPhone = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        },
+            maskOptions = {
+                onKeyPress: function (val, e, field, options) {
+                    field.mask(maskPhone.apply({}, arguments), options);
+                }
+            };
+
+        $('#telefone').mask(maskPhone, maskOptions);
+
+        //Events para adicionar via input
+        $("#btn-add-new-idioma").click(function () {
+            $("#info-idiomas").removeClass("hidden-element");
+            $("#btn-idiomas").removeClass("hidden-element");
+        });
+
+        $("#btn-add-new-capacitacao").click(function () {
+            $("#info-capacitacao").removeClass("hidden-element");
+            $("#info-capacitacao-instituicao").removeClass("hidden-element");
+            $("#btn-capacitacao").removeClass("hidden-element");
+        });
+
+        $("#btn-add-new-formacao").click(function () {
+            $("#info-instituicao-academica").removeClass("hidden-element");
+            $("#info-formacao-academica").removeClass("hidden-element");
+            $("#info-formacao-academica-data").removeClass("hidden-element");
+            $("#btn-formacao-academica").removeClass("hidden-element");
+        });
+
+        $("#btn-add-new-experiencia").click(function () {
+            $("#info-experiencia-cargo").removeClass("hidden-element");
+            $("#info-experiencia").removeClass("hidden-element");
+            $("#info-experiencia-data").removeClass("hidden-element");
+            $("#btn-experiencia").removeClass("hidden-element");
+        });
+
+        //Events para add na tabela
+        $("#btn-add-idioma").click(function () {
+            validateForm('.form-idiomas');
+            var isValid = formIsValid('.form-idiomas');
+
+            if (isValid) {
+                $("#info-idiomas").addClass("hidden-element");
+                $("#btn-idiomas").addClass("hidden-element");
+                addIdioma();
+                $("#tb-idiomas").removeClass("hidden-element");
+            }
+        });
+
+        $("#btn-add-experiencia").click(function () {
+            validateForm('.form-experiencia');
+            var isValid = formIsValid('.form-experiencia');
+
+            if (isValid) {
+                $("#info-experiencia").addClass("hidden-element");
+                $("#info-experiencia-data").addClass("hidden-element");
+                $("#info-experiencia-cargo").addClass("hidden-element");
+                $("#btn-experiencia").addClass("hidden-element");
+                addExperienciaProfissional();
+                $("#tb-experiencia").removeClass("hidden-element");
+            }
+        });
+
+        $("#btn-add-formacao-academica").click(function () {
+            validateForm('.form-formacao-academica');
+            var isValid = formIsValid('.form-formacao-academica');
+
+            if (isValid) {
+                $("#info-instituicao-academica").addClass("hidden-element");
+                $("#info-formacao-academica").addClass("hidden-element");
+                $("#info-formacao-academica-data").addClass("hidden-element");
+                $("#btn-formacao-academica").addClass("hidden-element");
+                addFormacaoAcademica();
+                $("#tb-formacao-academica").removeClass("hidden-element");
+            }
+        });
+
+        $("#btn-add-capacitacao").click(function () {
+            validateForm('.form-capacitacao');
+            var isValid = formIsValid('.form-capacitacao');
+
+            if (isValid) {
+                $("#info-capacitacao").addClass("hidden-element");
+                $("#info-capacitacao-instituicao").addClass("hidden-element");
+                $("#btn-capacitacao").addClass("hidden-element");
+                addCapacitacao();
+                $("#tb-capacitacao").removeClass("hidden-element");
+            }
+        });
+
+        //Events para cancel via input
+        $("#btn-cancelar-capacitacao").click(function () {
+            $("#info-capacitacao").addClass("hidden-element");
+            $("#info-capacitacao-instituicao").addClass("hidden-element");
+            $("#btn-capacitacao").addClass("hidden-element");
+        });
+
+        $("#btn-cancelar-idioma").click(function () {
+            $("#info-idiomas").addClass("hidden-element");
+            $("#btn-idiomas").addClass("hidden-element");
+        });
+
+        $("#btn-cancelar-formacao-academica").click(function () {
+            $("#info-instituicao-academica").addClass("hidden-element");
+            $("#info-formacao-academica").addClass("hidden-element");
+            $("#info-formacao-academica-data").addClass("hidden-element");
+            $("#btn-formacao-academica").addClass("hidden-element");
+        });
+
+        //Events para remover item tabela
+        $("#tb-idiomas").on("click", "#remove-idioma", function (e) {
+            $(this).closest('tr').remove();
+
+            cleanIdioma();
+
+            $("#info-idiomas").addClass("hidden-element");
+            $("#btn-idiomas").addClass("hidden-element");
+
+            if ($("#tb-idiomas tr").length == 1) {
+                $("#tb-idiomas").addClass("hidden-element");
+            }
+
+        });
+
+        $("#tb-experiencia").on("click", "#remove-experiencia", function (e) {
+            $(this).closest('tr').remove();
+
+            cleanExperienciaProfissional();
+
+            $("#info-experiencia").addClass("hidden-element");
+            $("#info-experiencia-data").addClass("hidden-element");
+            $("#btn-experiencia").addClass("hidden-element");
+
+            if ($("#tb-experiencia tr").length == 1) {
+                $("#tb-experiencia").addClass("hidden-element");
+            }
+
+        });
+
+        $("#tb-capacitacao").on("click", "#remove-capacitacao", function (e) {
+            $(this).closest('tr').remove();
+
+            cleanCapacitacao();
+
+            $("#info-capacitacao").addClass("hidden-element");
+            $("#info-capacitacao-instituicao").addClass("hidden-element");
+            $("#btn-capacitacao").addClass("hidden-element");
+
+            if ($("#tb-capacitacao tr").length == 1) {
+                $("#tb-capacitacao").addClass("hidden-element");
+            }
+        });
+
+        $("#tb-formacao-academica").on("click", "#remove-formacao-academica", function (e) {
+            $(this).closest('tr').remove();
+
+            cleanFormacaoAcademica();
+
+            $("#info-instituicao-academica").removeClass("hidden-element");
+            $("#info-formacao-academica").removeClass("hidden-element");
+            $("#info-formacao-academica-data").removeClass("hidden-element");
+            $("#btn-formacao-academica").removeClass("hidden-element");
+
+
+            if ($("#tb-formacao-academica tr").length == 1) {
+                $("#tb-formacao-academica").addClass("hidden-element");
+            }
+        });
+
+        addCapacitacao = function () {
+            const instituicao = $("#instituicao").val();
+            const curso = $("#curso").val();
+            const cargaHoraria = $("#carga-horaria").val();
+            const dataFormartted = formattedDate($("#data-conclusao-curso").val());
+
+            var table = document.getElementById("tb-capacitacao").getElementsByTagName('tbody')[0];
+            var row = table.insertRow($('tb-capacitacao tbody tr').length);
+
+            const trSave = '<tr>' +
+                '<td>' + curso + '</td>' +
+                '<td>' + instituicao + '</td>' +
+                '<td>' + cargaHoraria + '</td>' +
+                '<td>' + dataFormartted + '</td>' +
+                '<td>' +
+                '<button  class="btn btn-warning mb-3" onclick="editCapacitacao()">' +
+                '   <i class="far fa-edit"></i>' +
+                '</button>' +
+                ' <button  class="btn btn-danger mb-3" id="remove-capacitacao">' +
+                '      <i class="fa fa-trash"></i>' +
+                '   </button>' +
+                '</td>' +
+                '</tr>';
+
+            if ($isEdit) {
+                var item = { curso: curso, instituicao: instituicao, data: dataFormartted, cargaHoraria: cargaHoraria };
+                editItemCapacitacaoTable("tb-capacitacao", item);
+            } else {
+                row.innerHTML = trSave;
+            }
+
+            cleanCapacitacao();
+        }
+
+        addFormacaoAcademica = function () {
+            const instituicao = $("#instituicao-academica").val();
+            const curso = $("#curso-academico").val();
+            const situacaoCurso = $("#situacao-curso-academico").val();
+            const dataFormartted = formattedDate($("#data-inicio-academico").val()) + "-" + formattedDate($("#data-conclusao-academico").val());
+
+            var table = document.getElementById("tb-formacao-academica").getElementsByTagName('tbody')[0];
+            var row = table.insertRow($('tb-formacao-academica tbody tr').length);
+
+            const trSave = '<tr>' +
+                '<td>' + instituicao + '</td>' +
+                '<td>' + curso + '</td>' +
+                '<td>' + situacaoCurso + '</td>' +
+                '<td>' + dataFormartted + '</td>' +
+                '<td>' +
+                '<button  class="btn btn-warning mb-3" onclick="editFormacaoAcademica()">' +
+                '   <i class="far fa-edit"></i>' +
+                '</button>' +
+                ' <button  class="btn btn-danger mb-3" id="remove-formacao-academica">' +
+                '      <i class="fa fa-trash"></i>' +
+                '   </button>' +
+                '</td>' +
+                '</tr>';
+
+            if ($isEdit) {
+                var item = { curso: curso, instituicao: instituicao, data: dataFormartted, cargaHoraria: situacaoCurso };
+                editItemCapacitacaoTable("tb-formacao-academica", item);
+            } else {
+                row.innerHTML = trSave;
+            }
+
+            cleanFormacaoAcademica();
+        }
+
+        addExperienciaProfissional = function () {
+            const cargo = $("#cargo-experiencia").val();
+            const empresa = $("#empresa-experiencia").val();
+            const situacaoExperiencia = $("#situacao-experiencia").val();
+            const descricao = $("#descricao-experiencia").val();
+
+            console.log(situacaoExperiencia);
+
+            const dataFinal = situacaoExperiencia == 'Não' ? formattedDate($("#data-conclusao-experiencia").val()) : 'Atual';
+
+            const dataFormartted = formattedDate($("#data-inicio-experiencia").val()) + "-" + dataFinal;
+
+            var table = document.getElementById("tb-experiencia").getElementsByTagName('tbody')[0];
+            var row = table.insertRow($('tb-experiencia tbody tr').length);
+
+            const trSave = '<tr>' +
+                '<td>' + empresa + '</td>' +
+                '<td>' + cargo + '</td>' +
+                '<td>' + dataFormartted + '</td>' +
+                '<td>' + descricao + '</td>' +
+                '<td>' +
+                '<button  class="btn btn-warning mb-3" onclick="editExperiencia()">' +
+                '   <i class="far fa-edit"></i>' +
+                '</button>' +
+                ' <button  class="btn btn-danger mb-3" id="remove-experiencia">' +
+                '      <i class="fa fa-trash"></i>' +
+                '   </button>' +
+                '</td>' +
+                '</tr>';
+
+            if ($isEdit) {
+                var item = { curso: cargo, instituicao: empresa, data: dataFormartted, cargaHoraria: descricao };
+                editItemCapacitacaoTable("tb-experiencia", item);
+            } else {
+                row.innerHTML = trSave;
+            }
+
+
+            cleanExperienciaProfissional();
+        }
+
+        addIdioma = function () {
+            const idioma = $("#idioma").val();
+            const fluencia = $("#fluencia").val();
+            const dataFormartted = formattedDate($("#data-conclusao").val());
+
+            var table = document.getElementById("tb-idiomas").getElementsByTagName('tbody')[0];
+            var row = table.insertRow($('tb-idiomas tbody tr').length);
+
+            const trSave = '<tr>' +
+                '<td>' + idioma + '</td>' +
+                '<td>' + fluencia + '</td>' +
+                '<td>' + dataFormartted + '</td>' +
+                '<td>' +
+                '<button  class="btn btn-warning mb-3" onclick="editIdioma()">' +
+                '   <i class="far fa-edit"></i>' +
+                '</button>' +
+                ' <button  class="btn btn-danger mb-3" id="remove-idioma">' +
+                '      <i class="fa fa-trash"></i>' +
+                '   </button>' +
+                '</td>' +
+                '</tr>';
+
+            if ($isEdit) {
+                var item = { descricao: idioma, nivel: fluencia, data: dataFormartted }
+                editItemTable("tb-idiomas", item);
+            } else {
+                row.innerHTML = trSave;
+            }
+
+            cleanIdioma();
+        }
+
+        formattedDate = function (data) {
+            //Format Date -- DD/MM/YYYY
+            return data.substr(8, 10) + "/" + data.substr(5, 2) + "/" + data.substr(0, 4);
+        }
+
+        formattedDatePicker = function (data) {
+            //Format Date -- YYYY-MM-DD
+            return data.substr(6, 10) + "-" + data.substr(3, 2) + "-" + data.substr(0, 2);
+        }
+
+        editIdioma = function () {
+            cleanIdioma();
+
+            $('td').click(function () {
+                var tabela = document.getElementById("tb-idiomas").getElementsByTagName('tbody')[0];
+                var coluna = $(this).parent().children().index($(this));
+                var linha = $(this).parent().parent().children().index($(this).parent());
+
+                $linha = linha;
+
+                for (var i = 0, row; row = tabela.rows[i]; i++) {
+                    for (var j = 0, coluna; coluna = row.cells[j]; j++) {
+                        if (linha === i) {
+                            $("#idioma").val(row.cells[0].innerText);
+                            $("#fluencia").val(row.cells[1].innerText);
+                            $("#data-conclusao").val(formattedDatePicker(row.cells[2].innerText));
+                            $isEdit = true;
+                        }
+                    }
+                }
+            });
+
+            $("#info-idiomas").removeClass("hidden-element");
+            $("#btn-idiomas").removeClass("hidden-element");
+        }
+
+        editCapacitacao = function () {
+            cleanCapacitacao();
+
+            $('td').click(function () {
+                var tabela = document.getElementById("tb-capacitacao").getElementsByTagName('tbody')[0];
+                var coluna = $(this).parent().children().index($(this));
+                var linha = $(this).parent().parent().children().index($(this).parent());
+
+                $linha = linha;
+
+                for (var i = 0, row; row = tabela.rows[i]; i++) {
+                    for (var j = 0, coluna; coluna = row.cells[j]; j++) {
+                        if (linha === i) {
+                            $("#curso").val(row.cells[0].innerText);
+                            $("#instituicao").val(row.cells[1].innerText);
+                            $("#carga-horaria").val(row.cells[2].innerText);
+                            $("#data-conclusao-curso").val(formattedDatePicker(row.cells[3].innerText));
+                            $isEdit = true;
+                        }
+                    }
+                }
+            });
+
+            $("#info-capacitacao").removeClass("hidden-element");
+            $("#info-capacitacao-instituicao").removeClass("hidden-element");
+            $("#btn-capacitacao").removeClass("hidden-element");
+        }
+
+        editExperiencia = function () {
+            cleanExperienciaProfissional();
+
+            $('td').click(function () {
+                var tabela = document.getElementById("tb-experiencia").getElementsByTagName('tbody')[0];
+                var coluna = $(this).parent().children().index($(this));
+                var linha = $(this).parent().parent().children().index($(this).parent());
+
+                $linha = linha;
+
+                for (var i = 0, row; row = tabela.rows[i]; i++) {
+                    for (var j = 0, coluna; coluna = row.cells[j]; j++) {
+                        if (linha === i) {
+                            var data = row.cells[2].innerText;
+                            var situacaoEmprego = formattedDatePicker(data.substr(11, 20)) == '-al-At' ? "Sim" : "Não";
+                            console.log(situacaoEmprego);
+
+                            $("#empresa-experiencia").val(row.cells[0].innerText);
+                            $("#cargo-experiencia").val(row.cells[1].innerText);
+                            $("#situacao-experiencia").val(situacaoEmprego);
+                            $("#data-inicio-experiencia").val(formattedDatePicker(data.substr(0, 10)));
+                            $("#data-conclusao-experiencia").val(formattedDatePicker(data.substr(11, 20)));
+                            $("#descricao-experiencia").val(row.cells[3].innerText);
+
+                            $isEdit = true;
+                        }
+                    }
+                }
+            });
+
+            $("#info-experiencia").removeClass("hidden-element");
+            $("#info-experiencia-cargo").removeClass("hidden-element");
+            $("#info-experiencia-data").removeClass("hidden-element");
+            $("#btn-experiencia").removeClass("hidden-element");
+        }
+
+
+        editFormacaoAcademica = function () {
+            cleanFormacaoAcademica();
+
+            $('td').click(function () {
+                var tabela = document.getElementById("tb-formacao-academica").getElementsByTagName('tbody')[0];
+                var coluna = $(this).parent().children().index($(this));
+                var linha = $(this).parent().parent().children().index($(this).parent());
+
+                $linha = linha;
+
+                for (var i = 0, row; row = tabela.rows[i]; i++) {
+                    for (var j = 0, coluna; coluna = row.cells[j]; j++) {
+                        if (linha === i) {
+                            var data = row.cells[3].innerText;
+
+                            $("#curso-academico").val(row.cells[0].innerText);
+                            $("#instituicao-academica").val(row.cells[1].innerText);
+                            $("#situacao-curso-academico").val(row.cells[2].innerText);
+                            $("#data-inicio-academico").val(formattedDatePicker(data.substr(0, 10)));
+                            $("#data-conclusao-academico").val(formattedDatePicker(data.substr(11, 20)));
+
+                            $isEdit = true;
+                        }
+                    }
+                }
+            });
+
+            $("#info-instituicao-academica").removeClass("hidden-element");
+            $("#info-formacao-academica").removeClass("hidden-element");
+            $("#info-formacao-academica-data").removeClass("hidden-element");
+            $("#btn-formacao-academica").removeClass("hidden-element");
+        }
+
+        editItemTable = function (table, item) {
+            $isEdit = false;
+
+            var tabela = document.getElementById(table).getElementsByTagName('tbody')[0];
+            var linha = $linha + 1;
+
+            for (var i = 0, row; row = tabela.rows[i]; i++) {
+                if (linha === i) {
+                    row.cells[0].innerHTML = item.descricao;
+                    row.cells[1].innerHTML = item.nivel;
+                    row.cells[2].innerHTML = item.data;
+                }
+            }
+        }
+
+        editItemCapacitacaoTable = function (table, item) {
+            $isEdit = false;
+
+            var tabela = document.getElementById(table).getElementsByTagName('tbody')[0];
+            var linha = $linha + 1;
+
+            for (var i = 0, row; row = tabela.rows[i]; i++) {
+                if (linha === i) {
+                    row.cells[0].innerHTML = item.curso;
+                    row.cells[1].innerHTML = item.instituicao;
+                    row.cells[2].innerHTML = item.data;
+                    row.cells[3].innerHTML = item.cargaHoraria;
+                }
+            }
+        }
+
+        validateForm = function (form) {
+            // Seleciona o formulario que será validado
+            var formSelected = document.querySelectorAll(form);
+
+            // Verifica campos obrigatórios que não foram preenchidos
+            Array.prototype.slice.call(formSelected)
+                .forEach(function (form) {
+                    form.addEventListener('click', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, true);
+                });
+        }
+
+        formIsValid = function (form) {
+            return $(form).hasClass('was-validated');
+        }
+
+        cleanIdioma = function () {
+            $("#idioma").val("");
+            $("#fluencia").val("Básico");
+            $("#data-conclusao").val("");
+            $("#form-idiomas").removeClass("was-validated");
+        }
+
+        cleanCapacitacao = function () {
+            $("#curso").val("");
+            $("#instituicao").val("");
+            $("#carga-horaria").val("");
+            $("#data-conclusao-curso").val("");
+            $("#form-capacitacao").removeClass("was-validated");
+        }
+
+        cleanFormacaoAcademica = function () {
+            $("#instituicao-academica").val("");
+            $("#curso-academico").val("");
+            $("#situacao-curso-academico").val("");
+            $("#data-inicio-academico").val("");
+            $("#data-conclusao-academico").val("");
+            $("#form-formacao-academica").removeClass("was-validated");
+        }
+
+
+        cleanExperienciaProfissional = function () {
+            $("#cargo-experiencia").val("");
+            $("#empresa-experiencia").val("");
+            $("#situacao-experiencia").val("");
+            $("#data-inicio-experiencia").val("");
+            $("#data-conclusao-experiencia").val("");
+            $("#descricao-experiencia").val("");
+            $("#form-experiencia").removeClass("was-validated");
+
+        }
+    </script>
+</body>
+
+</html>

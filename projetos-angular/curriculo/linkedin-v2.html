@@ -1,0 +1,515 @@
+<style>
+    input {
+        border: none !important;
+        box-shadow: 0 0 0 0 !important;
+        outline: 0 !important;
+    }
+
+    .descricao-vaga {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .logo-vaga {
+        width: 70px;
+    }
+
+    .controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    .controls div {
+        cursor: pointer;
+        background-color: #4BCF99;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .controls div:not(.numbers),
+    .controls div.numbers div {
+        width: 40px;
+        height: 40px;
+    }
+
+    .controls div.numbers div:hover,
+    .controls div.numbers div.active {
+        color: #4BCF99;
+        background-color: #fff;
+    }
+
+    .btn-outline-primary {
+        color: #4BCF99;
+        border-color: #4BCF99;
+    }
+
+    .btn-check:active+.btn-outline-primary,
+    .btn-check:checked+.btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:active {
+        color: #ffffff !important;
+        background-color: #4BCF99 !important;
+        border-color: #4BCF99 !important;
+        box-shadow: 0 0 0 0 !important;
+        outline: 0 !important;
+    }
+
+    .btn-check:active+.btn-outline-primary,
+    .btn-check:checked+.btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:hover {
+        color: #ffffff !important;
+        background-color: #4BCF99 !important;
+        border-color: #4BCF99 !important;
+    }
+
+    .btn-search {
+        color: #ffffff !important;
+        background-color: #4BCF99 !important;
+        box-shadow: 0 0 0 0 !important;
+        outline: 0 !important;
+    }
+
+    .btn-search:hover {
+        color: #4BCF99 !important;
+        background-color: #ffffff !important;
+    }
+
+    .esconder-elemento {
+        display: none;
+    }
+
+    .msg-erro {
+        text-align: center;
+        margin-top: 10px;
+        font-weight: bolder;
+    }
+</style>
+
+<?php echo $bread; ?>
+<article class="content items-list-page">
+    <div class="title-search-block">
+        <div class="title-block">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="title"> <?php echo $page_title ?></h3>
+                </div>
+                <div class="col-md-6 text-right">
+                    <?php if ($this->usuariosmodel->permissao('E') || $this->usuariosmodel->permissao('S')) : ?>
+                        <a href="<?php echo base_url("dashboard/vagas/cadastrar") ?>" class="btn btn-primary btn-sm rounded-s"> Adicionar Novo </a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- campo de pesquisa -->
+        <div class="row align-items-start mt-4">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="searchItem" placeholder="Search job..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary btn-search" type="button" id="button-addon2" onclick="list.search()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Grupo de botões -->
+
+        <div class="row align-items-start mt-4">
+            <div class="col-md-12">
+                <div class="btn-group" role="group" aria-label="Botões para ">
+                    <button type="button" class="btn btn-outline-primary active" onclick="getVagas()">Todas as vagas</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filtrarVagas('Vaga efetivada')">Vaga efetiva</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filtrarVagas('Vaga desativada')">Vaga desativida</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filtrarVagas('Vaga expirada')">Vaga expirada</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="filtrarVagas('Vaga Aberta')">Vaga aberta</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="msgErrorSearch" class="esconder-elemento mt-4">
+            <div class="card h-100">
+                <div class="card-body  p-0">
+                    <p class="msg-erro">Não há vagas existentes para o filtro informado.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4" id="jobsSearch">
+            <!-- Lista das vagas  -->
+            <div class="col-md-6 px-0">
+                <div class="card h-60">
+                    <div class="card-body  p-0">
+                        <div id="vagas" class="list-group">
+                            <!-- monntar via Jquery -->
+                        </div>
+                    </div>
+                    <nav id="paginacao">
+                        <div class="controls">
+                            <div class="first">&#171;</div>
+                            <div class="prev">
+                                < </div>
+                                    <div class="numbers">
+                                        <div>1</div>
+                                    </div>
+                                    <div class="next">></div>
+                                    <div class="last">&#187;</div>
+                            </div>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Descrição da vaga -->
+            <div class="col-md-6 px-0">
+                <div class="card h-60">
+                    <div id="detalhesVaga" class="card-body">
+                        <h3 id="cargo"></h3>
+                        <small class="text-secondary" id="empresa"></small>, <small class="text-secondary" id="localidade"></small>
+                        <br>
+                        <span>Remuneração:</span><span id="remuneracao"></span>
+                        <br>
+                        <strong>Descrição da vaga</strong>
+                        <p id="descricacaoVaga"></p>
+                        <span id='id_vaga' class="esconder-elemento"> </span>
+                        <?php
+                        foreach ($vagas as $vaga) :
+
+                            $id = 1;
+
+                            if ($this->usuariosmodel->permissao('T')) :
+                                if (!empty($favoritos)) :
+                                    $favorito = (in_array($idVaga, $favoritos)) ? "active" : "";
+                                    $icon_favorito = (in_array($idVaga, $favoritos)) ? "fa fa-star" : "far fa-star";
+                                else :
+                                    $favorito = "";
+                                    $icon_favorito = "far fa-star";
+                                endif;
+                            endif;
+
+                            if ($this->usuariosmodel->permissao('T')) :
+                                if (!$this->vagasmodel->is_subscribed($id, $this->session->userAuth->usuario_id)) : ?>
+                                    <a href="<?php echo base_url('dashboard/vagas/inscricao/' . $idVaga); ?>" class="btn btn-info-outline">Candidatar-se</a>
+                                    <a href="<?php echo base_url('dashboard/vagas/favorito/' . $idVaga); ?>" class="btn btn-warning-outline add-favorito <?php echo $favorito; ?>"><i class="<?php echo $icon_favorito ?>"></i></a>
+                                <?php else : ?>
+                                    <!-- <a href="<?php echo base_url('dashboard/vagas/acompanhar-inscricao/'); ?>" class="btn btn-warning-outline"> Acompanhar inscrição</a> -->
+                            <?php
+                                endif;
+                            endif; ?>
+                            <?php if ($this->session->userAuth->pessoa_id == $vaga->id_pessoa || $this->usuariosmodel->permissao('C') || $this->usuariosmodel->permissao('CR')) : ?>
+                                <a href="<?php echo base_url('dashboard/vagas/editar/' . $id) ?>" class="btn btn-warning-outline">Editar</a>
+                            <?php
+                            endif;
+                            if ($this->session->userAuth->pessoa_id == $vaga->id_pessoa || $this->usuariosmodel->permissao('C')) : ?>
+                                <a href="<?php echo base_url('dashboard/vagas/candidatos/' . $id) ?>" class="btn btn-info-outline">Candidatos</a>
+                        <?php endif;
+                            break;
+                        endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</article>
+<script type="text/javascript">
+    $(".btn-group > .btn").click(function() {
+        $(".btn-group > .btn").removeClass("active");
+        $(this).addClass("active");
+    });
+
+    const vagasBack = <?php echo json_encode($vagas, true) ?>;
+    var vagas = vagasBack;
+
+    function getVagas() {
+        this.setVagas(vagas);
+    }
+
+    function setVagas(vagas) {
+        this.setVagasForm(vagas[0].id_vaga);
+        this.detalhesVaga(vagas[0].id_vaga);
+        var div = document.getElementById("vagas");
+        div.innerHTML = this.constructElement(vagas);
+    }
+
+    function constructElement(vagas) {
+        var listaVagas = '';
+        var infoVaga = '';
+
+        for (let count = 0; count < vagas.length; count++) {
+            listaVagas += `<a href="#" class="list-group-item list-group-item-action p-4" onclick="detalhesVaga(${vagas[count].id_vaga})">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">
+                                <span>${vagas[count].titulo}</span>
+                                </h5>                
+                            </div>
+                            <p  class="text-success">${vagas[count].status}</p>
+                            <small class="text-dark">${vagas[count].pub_inicio} a ${vagas[count].pub_fim}</small>
+                            </a>`;
+        }
+
+        return listaVagas;
+    }
+
+    function detalhesVaga(idVaga) {
+        for (var count = 0; count < vagas.length; count++) {
+            vagas[count].id_vaga == idVaga ? this.setVagasForm(vagas[count]) : false;
+        }
+    }
+
+    function formatarSalario(salario) {
+        return salario.replace(".", ",");
+    }
+
+    function setVagasForm(vaga) {
+        console.log(vaga);
+        document.getElementById("cargo").textContent = vaga.titulo;
+        document.getElementById("empresa").textContent = vaga.razao_social == "" || vaga.razao_social == null ? 'Empresa confidencial' : vaga.razao_social;
+        document.getElementById("localidade").textContent = vaga.cidadedesc + "(" + vaga.estadodesc + ")";
+        document.getElementById("remuneracao").textContent = "R$" + this.formatarSalario(vaga.salario);
+        document.getElementById("descricacaoVaga").textContent = vaga.descricao == "" || vaga.descricao == null ? 'Não há descrição.' : vaga.descricao;
+        document.getElementById("id_vaga").textContent = vaga.id_vaga;
+
+
+    };
+
+    function filtrarVagas(statusVaga) {
+        var div = document.getElementById("vagas");
+        var divJobsSearch = document.getElementById("jobsSearch");
+        var divMsgErrorSearch = document.getElementById("msgErrorSearch");
+
+        div.innerHTML = "";
+
+        let page = state.page - 1;
+        let start = page * state.perPage;
+        let end = start + state.perPage;
+
+        vagas = vagasBack.filter(vaga => {
+            if (vaga.status == statusVaga) {
+                return vaga;
+            }
+        });
+
+        if (vagas.length === 0) {
+            divJobsSearch.classList.add("esconder-elemento");
+            divMsgErrorSearch.classList.remove("esconder-elemento");
+        } else {
+            const paginatedItens = vagas.slice(start, end);
+            list.create(paginatedItens);
+            detalhesVaga(paginatedItens[0].id_vaga);
+
+            divJobsSearch.classList.remove("esconder-elemento");
+            divMsgErrorSearch.classList.add("esconder-elemento");
+
+            state.totalPage = Math.ceil(vagas.length / perPage);
+
+            controls.createListeners();
+            buttons.update();
+        }
+    }
+
+    const perPage = 10;
+
+    const html = {
+        get(element) {
+            return document.querySelector(element);
+        }
+    }
+
+    const state = {
+        page: 1,
+        perPage,
+        totalPage: Math.ceil(vagas.length / perPage),
+        maxVisibleButtons: 10
+    };
+
+    const controls = {
+        listPage: $(".controls > .numbers"),
+        next() {
+            state.page++;
+            if (state.page > state.totalPage) {
+                state.page--;
+            }
+        },
+        prev() {
+            state.page--;
+            if (state.page < 1) {
+                state.page++;
+            }
+        },
+        goTo(page) {
+            if (page < 1) {
+                page = 1;
+            }
+            state.page = +page;
+        },
+        createListeners() {
+            html.get('.first').addEventListener('click', () => {
+                controls.goTo(1);
+                update();
+                buttons.activeButton(controls.listPage[0].children[state.page - 1]);
+            })
+
+            html.get('.last').addEventListener('click', () => {
+                controls.goTo(state.totalPage);
+                update();
+                buttons.activeButton(controls.listPage[0].children[state.totalPage - 1]);
+            })
+
+            html.get('.next').addEventListener('click', () => {
+                controls.next();
+                update();
+                buttons.activeButton(controls.listPage[0].children[state.page - 1]);
+            })
+
+            html.get('.prev').addEventListener('click', () => {
+                controls.prev();
+                update();
+                console.log(state.page);
+                buttons.activeButton(controls.listPage[0].children[state.page - 1]);
+
+            })
+        }
+    }
+
+    const buttons = {
+        element: html.get('.controls .numbers'),
+        activeButton(button) {
+            $(".controls > .numbers > div").removeClass("active");
+            button.classList.add("active");
+        },
+        create(number) {
+            const button = document.createElement('div');
+
+            button.innerHTML = number;
+
+            if (state.page == number) {
+                button.classList.add('active');
+            }
+
+            button.addEventListener('click', (event) => {
+                const page = event.target.innerText;
+                controls.goTo(page);
+
+                update();
+
+                buttons.activeButton(button);
+
+            })
+            buttons.element.appendChild(button);
+        },
+        update() {
+            buttons.element.innerHTML = "";
+            const {
+                maxLeft,
+                maxRight
+            } = buttons.calculateMaxVisible();
+
+            for (let page = maxLeft; page <= maxRight; page++) {
+                buttons.create(page);
+            }
+        },
+        calculateMaxVisible() {
+            const {
+                maxVisibleButtons
+            } = state;
+            let maxLeft = (state.page - Math.floor(maxVisibleButtons / 2));
+            let maxRight = (state.page + Math.floor(maxVisibleButtons / 2));
+
+            if (maxLeft < 1) {
+                maxLeft = 1;
+                maxRight = maxVisibleButtons;
+            }
+
+            if (maxRight > state.totalPage) {
+                maxLeft = state.totalPage - (maxVisibleButtons - 1);
+                maxRight = state.totalPage;
+
+                if (maxLeft < 1) maxLeft = 1;
+            }
+
+            return {
+                maxLeft,
+                maxRight
+            };
+
+        }
+    }
+
+    var list = {
+        create(itens) {
+            var div = document.getElementById("vagas");
+            div.innerHTML = constructElement(itens);
+        },
+        update() {
+            var div = document.getElementById("vagas");
+            div.innerHTML = "";
+
+            let page = state.page - 1;
+            let start = page * state.perPage;
+            let end = start + state.perPage;
+
+            console.log(vagas);
+
+            const paginatedItens = vagas.slice(start, end);
+            list.create(paginatedItens);
+            detalhesVaga(paginatedItens[0].id_vaga);
+        },
+        search() {
+            var div = document.getElementById("vagas");
+            var divJobsSearch = document.getElementById("jobsSearch");
+            var divMsgErrorSearch = document.getElementById("msgErrorSearch");
+
+            div.innerHTML = "";
+
+            let page = state.page - 1;
+            let start = page * state.perPage;
+            let end = start + state.perPage;
+
+            const searchItem = document.getElementById("searchItem").value;
+
+            var vagasSearch = vagas.filter(vaga => {
+                if (vaga.titulo.indexOf(searchItem.toUpperCase()) >= 0) {
+                    return vaga;
+                }
+            });
+
+            vagas = vagasSearch;
+
+            if (vagasSearch.length === 0) {
+                divJobsSearch.classList.add("esconder-elemento");
+                divMsgErrorSearch.classList.remove("esconder-elemento");
+            } else {
+                const paginatedItens = vagasSearch.slice(start, end);
+                list.create(paginatedItens);
+                detalhesVaga(paginatedItens[0].id_vaga);
+
+                divJobsSearch.classList.remove("esconder-elemento");
+                divMsgErrorSearch.classList.add("esconder-elemento");
+
+                state.totalPage = Math.ceil(vagasSearch.length / perPage);
+
+                controls.createListeners();
+                buttons.update();
+            }
+        }
+    }
+
+
+    function update() {
+        list.update();
+    }
+
+    function init() {
+        list.update();
+        buttons.update();
+        controls.createListeners();
+    }
+
+    this.init();
+</script>

@@ -1,0 +1,40 @@
+{
+  "clientes": [
+    {
+      "id": 1,
+      "nome": "Ana Paula Pereira",
+      "cpf": "44099040003",
+      "dataNascimento": "1995-04-02",
+      "dataCadastro": "2022-05-02",
+      "renda": "2000,00",
+      "email": "ana@gmail.com"
+    },
+    {
+      "id": 3,
+      "nome": "Daniel Santos",
+      "cpf": "55780683085",
+      "dataNascimento": "1988-05-20",
+      "dataCadastro": "1988-05-20",
+      "renda": "7000.00",
+      "email": "daniel@gmail.com"
+    },
+    {
+      "id": 4,
+      "nome": "Edilene Souza",
+      "cpf": "93116898073",
+      "dataNascimento": "1970-03-05",
+      "dataCadastro": "1988-05-20",
+      "renda": "400,00",
+      "email": "edilene@gmail.com"
+    },
+    {
+      "id": 5,
+      "nome": "Marcus ",
+      "cpf": "03460972157",
+      "dataNascimento": "1998-01-01",
+      "dataCadastro": "2022-07-19",
+      "renda": "100,00",
+      "email": "marcus@gmail.com"
+    }
+  ]
+}

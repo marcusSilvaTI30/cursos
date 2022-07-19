@@ -1,0 +1,17 @@
+{
+  "name": "consumo-memoria",
+  "version": "1.0.0",
+  "description": "Projeto para aprendizado de NodeJS do bootcamp DIO",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "memoria",
+    "teste",
+    "nodejs",
+    "dio"
+  ],
+  "author": "Marcus Vinicius",
+  "license": "ISC"
+}
