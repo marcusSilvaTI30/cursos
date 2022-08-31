@@ -65,9 +65,9 @@ CREATE TABLE tb_produto (
 );
 
 CREATE TABLE tb_venda_has_produto (
-	cod_fiscal VARCHAR(50) NOT NULL, -- para vincular vários produtos em uma unica venda
 	id_venda INT NOT NULL, FOREIGN KEY(id_venda) REFERENCES tb_venda(id_venda),
 	id_produto INT NOT NULL, FOREIGN KEY(id_produto) REFERENCES tb_produto(id_produto)	
+	cod_fiscal VARCHAR(50) NOT NULL -- para vincular vários produtos em uma unica venda
 );
 
 -- Inserção de DADOS
@@ -121,9 +121,45 @@ VALUES
 
 
 --Insert com unico produto na venda
+--Insert com varios produtos
+WITH data(valor_total, id_cliente, id_vendedor, id_pagamento, id_produto, cod_fiscal, qtd_unidade) AS (
+   VALUES    	 
+      (10.00, 1, 1, 1, 5, '0001', 1),
+	  (5.00, 1, 1, 1, 6, '0001',  2),
+	  (1.00, 1, 1, 1, 5, '0001', 1),
+	  (2.00, 1, 1, 1, 5, '0001',1)
+), 
+ins1 AS (
+   INSERT INTO tb_venda (quantidade_venda, valor_total, id_cliente, id_vendedor, id_pagamento)
+   SELECT qtd_unidade, valor_total, id_cliente, id_vendedor, id_pagamento
+   FROM   data
+   RETURNING id_venda, valor_total, id_cliente, id_vendedor, id_pagamento
+   )
 
+INSERT INTO tb_venda_has_produto (id_venda, id_produto, cod_fiscal)
+SELECT ins1.id_venda, d.id_produto, d.cod_fiscal
+FROM   data d
+JOIN   ins1 USING (valor_total, id_cliente, id_vendedor, id_pagamento);
 
 --Insert com varios produtos
+WITH data(valor_total, id_cliente, id_vendedor, id_pagamento, id_produto, cod_fiscal, qtd_unidade) AS (
+   VALUES    	 
+      (10.00, 1, 1, 1, 5, '0001', 1),
+	  (5.00, 1, 1, 1, 6, '0001',  2),
+	  (1.00, 1, 1, 1, 5, '0001', 1),
+	  (2.00, 1, 1, 1, 5, '0001',1)
+), 
+ins1 AS (
+   INSERT INTO tb_venda (quantidade_venda, valor_total, id_cliente, id_vendedor, id_pagamento)
+   SELECT qtd_unidade, valor_total, id_cliente, id_vendedor, id_pagamento
+   FROM   data
+   RETURNING id_venda, valor_total, id_cliente, id_vendedor, id_pagamento
+   )
+
+INSERT INTO tb_venda_has_produto (id_venda, id_produto, cod_fiscal)
+SELECT ins1.id_venda, d.id_produto, d.cod_fiscal
+FROM   data d
+JOIN   ins1 USING (valor_total, id_cliente, id_vendedor, id_pagamento);
 
 --Consultas  nas tabelas
 --retorna categoria padaria e fornecedor abc fretes
@@ -181,4 +217,5 @@ SELECT
 FROM 
 	tb_produto 
 
-
+--Quantidades de itens numa determinada compra
+SELECT COUNT(cod_fiscal) AS "qtd itens"  FROM tb_venda_has_produto where cod_fiscal='0010'
