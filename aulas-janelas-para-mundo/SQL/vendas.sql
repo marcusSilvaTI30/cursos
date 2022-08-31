@@ -121,12 +121,8 @@ VALUES
 
 
 --Insert com unico produto na venda
---Insert com varios produtos
 WITH data(valor_total, id_cliente, id_vendedor, id_pagamento, id_produto, cod_fiscal, qtd_unidade) AS (
-   VALUES    	 
-      (10.00, 1, 1, 1, 5, '0001', 1),
-	  (5.00, 1, 1, 1, 6, '0001',  2),
-	  (1.00, 1, 1, 1, 5, '0001', 1),
+   VALUES    	      
 	  (2.00, 1, 1, 1, 5, '0001',1)
 ), 
 ins1 AS (
