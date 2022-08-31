@@ -1,3 +1,21 @@
+--Deleta todas as tabelas do banco de dados
+
+DROP TABLE tb_venda_has_produto;
+
+DROP TABLE tb_produto;
+
+DROP TABLE tb_categoria;
+
+DROP TABLE tb_fornecedor;
+
+DROP TABLE tb_venda;
+
+DROP TABLE tb_vendedor;
+
+DROP TABLE tb_pagamento;
+
+DROP TABLE tb_cliente;
+
 --Criação de tabelas
 CREATE TABLE tb_cliente (
     id_cliente bigserial PRIMARY KEY,
@@ -29,6 +47,7 @@ CREATE TABLE tb_fornecedor(
 
 CREATE TABLE tb_venda (
 	id_venda bigserial PRIMARY KEY,
+	quantidade_venda INT NOT NULL, 
 	valor_total DECIMAL NOT NULL,	
 	id_cliente INT NOT NULL, FOREIGN KEY(id_cliente) REFERENCES tb_cliente(id_cliente),
 	id_vendedor INT NOT NULL, FOREIGN KEY(id_vendedor) REFERENCES tb_vendedor(id_vendedor),
@@ -39,17 +58,17 @@ CREATE TABLE tb_venda (
 CREATE TABLE tb_produto (
 	id_produto bigserial PRIMARY KEY,
 	descricao VARCHAR(45) NOT NULL,
-	preco DECIMAL NOT NULL,
+	preco_unitario DECIMAL NOT NULL,
 	quantidade_estoque INT NOT NULL,
 	id_categoria INT NOT NULL, FOREIGN KEY(id_categoria) REFERENCES tb_categoria(id_categoria),
 	id_fornecedor INT NOT NULL, FOREIGN KEY(id_fornecedor) REFERENCES tb_fornecedor(id_fornecedor)
 );
 
 CREATE TABLE tb_venda_has_produto (
+	cod_fiscal VARCHAR(50) NOT NULL, -- para vincular vários produtos em uma unica venda
 	id_venda INT NOT NULL, FOREIGN KEY(id_venda) REFERENCES tb_venda(id_venda),
-	id_produto INT NOT NULL, FOREIGN KEY(id_produto) REFERENCES tb_produto(id_produto)
+	id_produto INT NOT NULL, FOREIGN KEY(id_produto) REFERENCES tb_produto(id_produto)	
 );
-
 
 -- Inserção de DADOS
 INSERT INTO 
@@ -93,7 +112,7 @@ VALUES
 	('Maria',  '61998584587', 'maria@xpto.com');
 
 INSERT INTO 
-	tb_produto(descricao, preco, quantidade_estoque, id_categoria, id_fornecedor)
+	tb_produto(descricao, preco_unitario, quantidade_estoque, id_categoria, id_fornecedor)
 VALUES
 	('Arroz', 15.20, 10, 19, 7),
 	('Feijão',   5.20, 4, 19, 7),
@@ -101,22 +120,8 @@ VALUES
 	('Macarrão', 1.20, 2, 20, 9);
 
 
---Insert com unico produto
-WITH data(valor_total, data_venda, id_cliente, id_vendedor, id_pagamento) AS (
-   VALUES                    
-      (10.00, '1978-02-05', 7, 7, 11)
-   )
-, ins1 AS (
-   INSERT INTO tb_venda (valor_total, id_cliente, id_vendedor, id_pagamento)
-   SELECT valor_total, id_cliente, id_vendedor, id_pagamento
-   FROM   data
-   RETURNING id_venda
-   )
+--Insert com unico produto na venda
 
-INSERT INTO tb_venda_has_produto (id_venda, id_produto)
-SELECT id_venda, 18
-FROM   ins1
-RETURNING id_venda;
 
 --Insert com varios produtos
 
