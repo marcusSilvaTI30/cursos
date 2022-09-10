@@ -157,6 +157,26 @@ SELECT ins1.id_venda, d.id_produto, d.cod_fiscal
 FROM   data d
 JOIN   ins1 USING (valor_total, id_cliente, id_vendedor, id_pagamento);
 
+
+--Atuaizando valores nas tabelas
+--tb_venda
+UPDATE 
+	tb_venda 
+SET 
+  id_vendedor=2
+WHERE 
+	id_venda = 8;
+
+--tb_categoria
+UPDATE
+	tb_categoria
+SET
+	descricao='Produto de limpeza'
+WHERE
+	id_categoria=4;
+
+
+
 --Consultas  nas tabelas
 --retorna categoria padaria e fornecedor abc fretes
 SELECT 
@@ -213,5 +233,48 @@ SELECT
 FROM 
 	tb_produto 
 
---Quantidades de itens numa determinada compra
+-- Selecionar produtos com preço menor que 5.20
+SELECT
+	descricao AS "Produto",
+	preco_unitario AS "Preço"	
+FROM
+	tb_produto
+WHERE
+  preco_unitario < 5.20;
+
+-- Selecionar produtos com preço maior que 5.20
+SELECT
+	descricao AS "Produto",
+	preco_unitario AS "Preço"	
+FROM
+	tb_produto
+WHERE
+  preco_unitario > 5.20;
+
+-- Selecionar produtos com preço entre 1.00 e 4.00
+SELECT
+	descricao AS "Produto",
+	preco_unitario AS "Preço"	
+FROM
+	tb_produto
+WHERE
+  preco_unitario >= 1.00 AND preco_unitario <= 4.00;
+
+-- Quantidades de itens numa determinada compra
 SELECT COUNT(cod_fiscal) AS "qtd itens"  FROM tb_venda_has_produto where cod_fiscal='0010'
+
+-- Valor total de vendas por vendedor
+SELECT
+	vendedor.nome AS "Vendedor",
+	COUNT(venda.valor_total) AS "Quandidade de vendas",
+	SUM(venda.valor_total) AS "Valor total"
+FROM 
+	tb_venda AS venda
+INNER JOIN 
+	tb_vendedor AS vendedor
+ON
+ 	vendedor.id_vendedor = venda.id_vendedor 
+GROUP BY 
+	venda.id_vendedor,vendedor.nome
+ORDER BY
+	vendedor.nome;
