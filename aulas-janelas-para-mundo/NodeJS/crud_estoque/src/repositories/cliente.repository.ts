@@ -1,18 +1,18 @@
 import db from "../db";
 import DatabaseError from "../models/errors/database.error.model";
-import Categoria from "../models/categoria.model";
+import Cliente from "../models/cliente.model";
 
-class CategoriaRepository {
+class ClienteRepository {
 
     async findAll() {
         const sql = `
             SELECT 
-                id_categoria, descricao
+              nome, telefone, email
             FROM
-                tb_categoria
+                tb_cliente
         `;
 
-        const { rows } = await db.query<Categoria>(sql);
+        const { rows } = await db.query<Cliente>(sql);
 
         return rows || [];
     }
@@ -21,16 +21,16 @@ class CategoriaRepository {
         try {
             const sql = `        
                 SELECT 
-                    descricao
+                    nome, telefone, email
                 FROM
-                    tb_categoria
+                    tb_cliente
                 WHERE 
-                    id_categoria = $1
+                    id_cliente = $1
                 `;
 
             const valores = [id];
 
-            const { rows } = await db.query<Categoria>(sql, valores);
+            const { rows } = await db.query<Cliente>(sql, valores);
             const [user] = rows;
 
             return user;
@@ -41,37 +41,38 @@ class CategoriaRepository {
 
     }
 
-    async save(categoria: Categoria) :Promise<string> {
-        console.log(categoria)
+    async save(cliente: Cliente) :Promise<string> {
         const sql = `
-            INSERT INTO tb_categoria (                
-                descricao
+            INSERT INTO tb_cliente (                
+                nome, telefone, email
             )
             VALUES 
-                ($1)
+                ($1, $2, $3)
             RETURNING 
-                id_categoria
+                id_cliente
         `;
 
-        const valores = [categoria.descricao];
+        const valores = [cliente.nome, cliente.telefone, cliente.email];
 
         const { rows } = await db.query<{ id: string }>(sql, valores);
-        const [ novaCategoria ] = rows;
+        const [ novoCliente ] = rows;
 
-        return novaCategoria.id;
+        return novoCliente.id;
     }
 
-    async update(categoria: Categoria) : Promise<void> {
+    async update(cliente: Cliente) : Promise<void> {
         const sql = `
             UPDATE 
-                tb_categoria 
+                tb_cliente 
             SET 
-                descricao = $1
+                nome = $1,
+                telefone = $2,
+                email = $3
             WHERE 
-                id_categoria = $2
+                id_cliente = $4
         `;
 
-        const valores = [categoria.descricao, categoria.id_categoria];
+        const valores = [cliente.nome, cliente.telefone, cliente.email, cliente.id_cliente];
         await db.query(sql, valores);
 
     }
@@ -80,9 +81,9 @@ class CategoriaRepository {
         const sql = `
             DELETE
             FROM 
-                tb_categoria
+                tb_cliente
             WHERE 
-                id_categoria = $1
+                id_cliente = $1
         `;
         const valores = [id];
         await db.query(sql, valores);
@@ -90,4 +91,4 @@ class CategoriaRepository {
 
 }
 
-export default new CategoriaRepository();
+export default new ClienteRepository();

@@ -1,11 +1,11 @@
 # Microsserviço  de estoque com NodeJS #
 
-Este é um projeto desenvolvido ministrado em sala de aula junto com os alunos do curso oferecido pela Janelas para o Mundo. Tendo como objetivo a dissiminação de conhecimento sobre Node e outras tecnologias relacionadas.
+Este é um projeto desenvolvido em sala de aula com os alunos do curso Let´s Code oferecido pelos Centros de Educação Janela para o Mundo. Ele tem como objetivo a disseminação de conhecimento sobre Node e outras tecnologias relacionadas.
 
-Neste projeto tem como objetivo a criação de um microsserviço.
+Este  projeto almeja a criação de um microsserviço.
 
 # Composição dos serviços que serão disponibilizados nesta API #
-No presente projeto temos disponibilizados os seguintes # endpoints #:
+No presente projeto temos disponibilizados os seguintes  endpoints:
 
 # Categoria #
 * GET /categorias
@@ -21,7 +21,7 @@ No presente projeto temos disponibilizados os seguintes # endpoints #:
 #  #
 
 # Execução do projeto #
-* Execute o seguinte comando para realizar a intalação das dependências necessárias para a execução do projeto:
+* Execute o seguinte comando para realizar a instalação das dependências necessárias para a execução do projeto:
     npm install
 * Execute o seguinte comando para iniciar o servidor:
     npm run dev

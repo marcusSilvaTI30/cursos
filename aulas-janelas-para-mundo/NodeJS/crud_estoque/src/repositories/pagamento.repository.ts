@@ -1,18 +1,18 @@
 import db from "../db";
 import DatabaseError from "../models/errors/database.error.model";
-import Categoria from "../models/categoria.model";
+import Pagamento from "../models/pagamento.model";
 
-class CategoriaRepository {
+class PagamentoRepository {
 
     async findAll() {
         const sql = `
             SELECT 
-                id_categoria, descricao
+                descr_pagamento
             FROM
-                tb_categoria
+                tb_pagamento
         `;
 
-        const { rows } = await db.query<Categoria>(sql);
+        const { rows } = await db.query<Pagamento>(sql);
 
         return rows || [];
     }
@@ -21,16 +21,16 @@ class CategoriaRepository {
         try {
             const sql = `        
                 SELECT 
-                    descricao
+                    descr_pagamento
                 FROM
-                    tb_categoria
+                    tb_pagamento
                 WHERE 
-                    id_categoria = $1
+                    id_pagamento = $1
                 `;
 
             const valores = [id];
 
-            const { rows } = await db.query<Categoria>(sql, valores);
+            const { rows } = await db.query<Pagamento>(sql, valores);
             const [user] = rows;
 
             return user;
@@ -41,37 +41,36 @@ class CategoriaRepository {
 
     }
 
-    async save(categoria: Categoria) :Promise<string> {
-        console.log(categoria)
+    async save(pagamento: Pagamento) :Promise<string> {
         const sql = `
-            INSERT INTO tb_categoria (                
-                descricao
+            INSERT INTO tb_pagamento (                
+                descr_pagamento
             )
             VALUES 
                 ($1)
             RETURNING 
-                id_categoria
+                id_pagamento
         `;
 
-        const valores = [categoria.descricao];
+        const valores = [pagamento.descr_pagamento];
 
         const { rows } = await db.query<{ id: string }>(sql, valores);
-        const [ novaCategoria ] = rows;
+        const [ novaFormaPagamento ] = rows;
 
-        return novaCategoria.id;
+        return novaFormaPagamento.id;
     }
 
-    async update(categoria: Categoria) : Promise<void> {
+    async update(pagamento: Pagamento) : Promise<void> {
         const sql = `
             UPDATE 
-                tb_categoria 
+                tb_pagamento 
             SET 
-                descricao = $1
+                descr_pagamento = $1
             WHERE 
-                id_categoria = $2
+                id_pagamento = $2
         `;
 
-        const valores = [categoria.descricao, categoria.id_categoria];
+        const valores = [pagamento.descr_pagamento, pagamento.id_pagamento];
         await db.query(sql, valores);
 
     }
@@ -80,9 +79,9 @@ class CategoriaRepository {
         const sql = `
             DELETE
             FROM 
-                tb_categoria
+                tb_pagamento
             WHERE 
-                id_categoria = $1
+                id_pagamento = $1
         `;
         const valores = [id];
         await db.query(sql, valores);
@@ -90,4 +89,4 @@ class CategoriaRepository {
 
 }
 
-export default new CategoriaRepository();
+export default new PagamentoRepository();

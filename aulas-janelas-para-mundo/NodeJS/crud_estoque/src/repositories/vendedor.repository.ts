@@ -1,18 +1,18 @@
 import db from "../db";
 import DatabaseError from "../models/errors/database.error.model";
-import Categoria from "../models/categoria.model";
+import Vendedor from "../models/vendedor.model";
 
-class CategoriaRepository {
+class VendedorRepository {
 
     async findAll() {
         const sql = `
             SELECT 
-                id_categoria, descricao
+                nome
             FROM
-                tb_categoria
+                tb_vendedor
         `;
 
-        const { rows } = await db.query<Categoria>(sql);
+        const { rows } = await db.query<Vendedor>(sql);
 
         return rows || [];
     }
@@ -21,16 +21,15 @@ class CategoriaRepository {
         try {
             const sql = `        
                 SELECT 
-                    descricao
+                    nome
                 FROM
-                    tb_categoria
-                WHERE 
-                    id_categoria = $1
+                    tb_vendedor
+                WHERE id_vendedor = $1
                 `;
 
             const valores = [id];
 
-            const { rows } = await db.query<Categoria>(sql, valores);
+            const { rows } = await db.query<Vendedor>(sql, valores);
             const [user] = rows;
 
             return user;
@@ -41,37 +40,35 @@ class CategoriaRepository {
 
     }
 
-    async save(categoria: Categoria) :Promise<string> {
-        console.log(categoria)
+    async save(vendedor: Vendedor) :Promise<string> {
         const sql = `
-            INSERT INTO tb_categoria (                
-                descricao
+            INSERT INTO tb_vendedor (                
+                nome
             )
             VALUES 
                 ($1)
-            RETURNING 
-                id_categoria
+            RETURNING id_vendedor
         `;
 
-        const valores = [categoria.descricao];
+        const valores = [vendedor.nome];
 
         const { rows } = await db.query<{ id: string }>(sql, valores);
-        const [ novaCategoria ] = rows;
+        const [ novoVendedor ] = rows;
 
-        return novaCategoria.id;
+        return novoVendedor.id;
     }
 
-    async update(categoria: Categoria) : Promise<void> {
+    async update(vendedor: Vendedor) : Promise<void> {
         const sql = `
             UPDATE 
-                tb_categoria 
+                tb_vendedor 
             SET 
-                descricao = $1
+                nome = $1
             WHERE 
-                id_categoria = $2
+                id_vendedor = $2
         `;
 
-        const valores = [categoria.descricao, categoria.id_categoria];
+        const valores = [vendedor.nome, vendedor.id_vendedor];
         await db.query(sql, valores);
 
     }
@@ -80,14 +77,13 @@ class CategoriaRepository {
         const sql = `
             DELETE
             FROM 
-                tb_categoria
+                tb_vendedor
             WHERE 
-                id_categoria = $1
+                id_vendedor = $1
         `;
         const valores = [id];
         await db.query(sql, valores);
     }
-
 }
 
-export default new CategoriaRepository();
+export default new VendedorRepository();

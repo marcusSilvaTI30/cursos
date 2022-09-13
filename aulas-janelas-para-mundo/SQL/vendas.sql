@@ -178,6 +178,119 @@ WHERE
 
 
 --Consultas  nas tabelas
+--retorna uma determinado produto com sua categoria e fornecedor
+SELECT 
+	produto.id_produto,
+	produto.descricao,	
+	categoria.descricao,
+	produto.id_fornecedor,
+	fornecedor.nome
+FROM 
+	tb_produto AS produto
+INNER JOIN
+	tb_categoria AS categoria
+ON
+  categoria.id_categoria = produto.id_categoria
+INNER JOIN
+	tb_fornecedor AS fornecedor
+ON
+  fornecedor.id_fornecedor = produto.id_fornecedor
+WHERE
+	produto.id_produto=5;
+
+-- retorna categoria e fornecedor na consulta de produtos
+SELECT 
+	produto.descricao,	
+	categoria.descricao,
+	produto.id_fornecedor,
+	fornecedor.nome
+FROM 
+	tb_produto AS produto
+INNER JOIN
+	tb_categoria AS categoria
+ON
+  categoria.id_categoria = produto.id_categoria
+INNER JOIN
+	tb_fornecedor AS fornecedor
+ON
+  fornecedor.id_fornecedor = produto.id_fornecedor;
+
+--retorna todas vendas
+SELECT
+	vp.cod_fiscal,
+    v.data_venda,
+	v.id_cliente,
+	c.nome,
+	v.id_vendedor,
+	vendedor.nome,
+	vp.id_produto,
+	p.descricao,
+	p.preco_unitario,
+	v.quantidade_venda,
+	v.valor_total,
+	pag.descr_pagamento
+FROM 
+	tb_venda_has_produto AS vp
+INNER JOIN
+	tb_produto AS p
+ON
+	p.id_produto = vp.id_produto
+INNER JOIN
+	tb_venda AS v
+ON
+	v.id_venda = vp.id_venda
+INNER JOIN
+	tb_cliente AS c
+ON
+	v.id_cliente = c.id_cliente
+INNER JOIN
+	tb_vendedor AS vendedor
+ON
+	v.id_vendedor = vendedor.id_vendedor
+INNER JOIN
+	tb_pagamento AS pag
+ON
+	v.id_pagamento = pag.id_pagamento
+
+--retorna uma venda especifica
+SELECT
+	vp.cod_fiscal,
+    v.data_venda,
+	v.id_cliente,
+	c.nome,
+	v.id_vendedor,
+	vendedor.nome,	
+	vp.id_produto,
+	p.descricao,
+	p.preco_unitario,
+	v.quantidade_venda,
+	v.valor_total,
+	pag.descr_pagamento
+FROM 
+	tb_venda_has_produto AS vp
+INNER JOIN
+	tb_produto AS p
+ON
+	p.id_produto = vp.id_produto
+INNER JOIN
+	tb_venda AS v
+ON
+	v.id_venda = vp.id_venda
+INNER JOIN
+	tb_cliente AS c
+ON
+	v.id_cliente = c.id_cliente
+INNER JOIN
+	tb_vendedor AS vendedor
+ON
+	v.id_vendedor = vendedor.id_vendedor
+INNER JOIN
+	tb_pagamento AS pag
+ON
+	v.id_pagamento = pag.id_pagamento
+WHERE
+	vp.cod_fiscal = '0002';
+
 --retorna categoria padaria e fornecedor abc fretes
 SELECT 
 	produto.descricao,	
