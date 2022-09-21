@@ -1,0 +1,20 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "325457",
+  "database": "estoque",
+  "entities": [
+    "src/models/**/*.ts"
+ ],
+ "migrations": [
+  "src/migrations/**/*.ts"
+],
+ "cli":{
+  "migrationsDir": [
+    "src/migrations/"
+  ],
+  "entitiesDir": "src/models"
+  }
+}

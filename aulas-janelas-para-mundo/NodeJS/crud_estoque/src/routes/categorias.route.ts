@@ -9,7 +9,7 @@ categoriasRoutes.get('/categorias', async (req: Request, res: Response, next: Ne
     res.status(StatusCodes.OK).send(categorias);
 })
 
-categoriasRoutes.get('/categorias/:id', async (req: Request, res: Response, next: NextFunction) => {
+categoriasRoutes.get('/categorias/:id', async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
     try {
         const id_categoria = req.params.id;
         const categoria = await categoriaRepository.findById(id_categoria);
