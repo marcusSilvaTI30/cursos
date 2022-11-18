@@ -1,6 +1,7 @@
 import { Repository } from 'typeorm';
 import { typeorm } from '../data/data-source';
 import CriarFuncionarioDTO from '../dtos/CriarFuncionarioDTO';
+import EditarFuncionarioDTO from '../dtos/EditarFuncionarioDTO';
 import { Cargo, Funcionario } from '../entities/Funcionario';
 
 export class FuncionarioService {
@@ -30,5 +31,9 @@ export class FuncionarioService {
 
   async criarFuncionario(funcionario: CriarFuncionarioDTO) {
     return this.funcionarioRepository.save(funcionario);
+  }
+
+  async updateFuncionario(funcionario: EditarFuncionarioDTO){
+    return this.funcionarioRepository.update(funcionario.id, funcionario);
   }
 }

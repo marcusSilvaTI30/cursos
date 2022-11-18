@@ -49,4 +49,31 @@ export class FuncionarioController {
       return response.json({ error: error.message });
     }
   }
+
+  async updateFuncionarioControler(request: Request, response: Response) {
+    try {
+      const funcionarioService = new FuncionarioService();
+      const { id, nome, cargo } = request.body;
+
+      let gerente = request.body.gerente;
+
+      if (gerente) {
+        gerente =
+          (await funcionarioService.findOneGerente(gerente)) || undefined;
+        if (!gerente) {
+          return response.status(404).json({ error: 'Gerente não encontrado' });
+        }
+      }
+      const result = await funcionarioService.updateFuncionario({
+        id,
+        nome,
+        cargo,
+        gerente,
+
+      });
+      return response.json(result);
+    } catch (error: any) {
+      return response.json({ error: error.message });
+    }
+  }
 }

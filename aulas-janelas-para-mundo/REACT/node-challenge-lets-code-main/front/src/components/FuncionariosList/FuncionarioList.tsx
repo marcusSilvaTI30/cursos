@@ -9,19 +9,19 @@ import {
   Stack,
   Table,
   Text,
-} from '@mantine/core';
+} from "@mantine/core";
 
-import { IconEdit, IconTrash } from '@tabler/icons';
-import { useEffect, useState } from 'react';
-import { findAllFuncionario, Funcionario } from '../../services/funcionario';
-import { EditarFuncionarioModal } from './EditarFuncionarioModal/EditarFuncionarioModal';
+import { IconEdit, IconTrash } from "@tabler/icons";
+import { useEffect, useState } from "react";
+import { findAllFuncionario, Funcionario } from "../../services/funcionario";
+import { EditarFuncionarioModal } from "./EditarFuncionarioModal/EditarFuncionarioModal";
 
 interface FuncionarioListProps {
   data: Funcionario[];
 }
 
 const getInitials = (name: string) => {
-  const names = name.split(' ');
+  const names = name.split(" ");
   if (names.length > 1) {
     return names[0][0].concat(names[1][0]);
   } else {
@@ -33,6 +33,19 @@ export function FuncionarioList({ data }: FuncionarioListProps) {
   const [openedModalEditar, setOpenedModalEditar] = useState(false);
   const [funcionarioToEdit, setFuncionarioToEdit] =
     useState<Funcionario | null>(null);
+
+  const [funcionarios, setFuncionario] = useState<Funcionario[]>([]);
+  const [haveChanges, setHaveChanges] = useState(true);
+
+  useEffect(() => {
+    if (haveChanges) {
+      findAllFuncionario().then((data) => {
+        setFuncionario(data.data);
+      });
+    }
+
+    setHaveChanges(false);
+  }, [haveChanges]);
 
   const handleOpenModalEditar = (funcionario: {
     id: number;
@@ -81,7 +94,7 @@ export function FuncionarioList({ data }: FuncionarioListProps) {
                     </Group>
                   </td>
                   <td>{item.cargo}</td>
-                  <td>{item.gerente ? item.gerente.nome : 'sem gerente'}</td>
+                  <td>{item.gerente ? item.gerente.nome : "sem gerente"}</td>
                   <td>
                     <Group>
                       <ActionIcon
@@ -131,6 +144,7 @@ export function FuncionarioList({ data }: FuncionarioListProps) {
         <EditarFuncionarioModal
           opened={openedModalEditar}
           onClose={() => setOpenedModalEditar(false)}
+          updateList={() => setHaveChanges(true)}
           data={funcionarioToEdit}
         />
       )}

@@ -17,3 +17,4 @@ router.get(
   new FuncionarioController().findAllGerentes
 );
 router.post('/funcionario', new FuncionarioController().create);
+router.put('/funcionario/editar', new FuncionarioController().updateFuncionarioControler);

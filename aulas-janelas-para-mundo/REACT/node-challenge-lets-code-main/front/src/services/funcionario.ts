@@ -23,3 +23,12 @@ export const createFuncionario = async (data: {
 }) => {
   return api.post('/funcionario', { ...data });
 };
+
+export const updateFuncionario = async (data: {
+  id: number;
+  nome: string;
+  cargo: string;
+  gerente?: string;
+}) => {
+  return api.put('funcionario/editar', { ...data })
+};
